@@ -14,12 +14,14 @@ namespace CrudPessoa.Controllers
         {
             new Pessoa()
             {
+                Id = 1,
                 Nome = "Caio",
                 Idade = 29,
                 Dinheiro = Convert.ToDecimal(22.30),
             },
             new Pessoa()
             {
+                Id = 2,
                 Nome = "Cesar",
                 Idade = 29,
                 Dinheiro = Convert.ToDecimal(02.50),
@@ -28,7 +30,7 @@ namespace CrudPessoa.Controllers
 
         public IActionResult Index()
         {
-            return View(listaPessoas);
+            return View(listaPessoas.OrderBy(x => x.Id));
         }
 
         public IActionResult CriarPessoaForm()
@@ -38,6 +40,7 @@ namespace CrudPessoa.Controllers
         public IActionResult CriarPessoa(Pessoa pessoa)
         {
             listaPessoas.Add(pessoa);
+            pessoa.Id = listaPessoas.Select(i => i.Id).Max() + 1;
             return RedirectToAction("Index");
         }
 
@@ -47,9 +50,10 @@ namespace CrudPessoa.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletarPessoa(Pessoa pessoa)
+        public IActionResult DeletarPessoa(int id)
         {
-            listaPessoas.Remove(pessoa);
+            var pessoa = listaPessoas.Where(x => x.Id == id);
+            listaPessoas.Remove(listaPessoas.Where(x => x.Id == id).First());
             return RedirectToAction("Index");
         }
 
@@ -61,7 +65,7 @@ namespace CrudPessoa.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPessoa(Pessoa pessoa)
         {
-            listaPessoas.Remove(listaPessoas.Where(x => x == pessoa).First());
+            listaPessoas.Remove(listaPessoas.Where(x => x.Id == pessoa.Id).First());
             listaPessoas.Add(pessoa);
             return RedirectToAction("Index");
         }

@@ -5,11 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>Remover pessoa</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que quer remover a pessoa abaixo?</h3>
 <div>
-    <h4>Pessoa</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -33,7 +32,8 @@
     </dl>
     
     <form asp-action="DeletarPessoa">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input asp-for="Id" type="hidden" />
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar para a lista de pessoas</a>
     </form>
 </div>

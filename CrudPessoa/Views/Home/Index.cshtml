@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
@@ -29,6 +32,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
@@ -38,8 +44,8 @@
                     @Html.DisplayFor(modelItem => item.Dinheiro)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", item) | @*new { /* id=item.PrimaryKey */ }*@
-                    @Html.ActionLink("Delete", "Delete", item)
+                    @Html.ActionLink("Editar", "Edit", item) | @*new { /* id=item.PrimaryKey */ }*@
+                    @Html.ActionLink("Remover", "Delete", item)
                 </td>
             </tr>
         }
