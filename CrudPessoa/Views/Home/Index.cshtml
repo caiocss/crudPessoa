@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CrudPessoa.Models.Pessoa>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Lista de Pessoas</h1>
+
+<p>
+    <a asp-action="CriarPessoaForm">Adicionar Nova Pessoa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dinheiro)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dinheiro)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", item) | @*new { /* id=item.PrimaryKey */ }*@
+                    @Html.ActionLink("Delete", "Delete", item)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
