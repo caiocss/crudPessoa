@@ -12,8 +12,7 @@ namespace CrudPessoa.Models
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]        
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
-        [RegularExpression("([0-9])", ErrorMessage = "Só é permitido numeros")]
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]        
         public int Idade { get; set; }
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public decimal Dinheiro { get; set; }
