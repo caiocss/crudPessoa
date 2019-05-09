@@ -38,23 +38,32 @@ namespace CrudPessoa.Controllers
         public IActionResult CriarPessoa(Pessoa pessoa)
         {
             listaPessoas.Add(pessoa);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(Pessoa pessoa)
         {
             return View(pessoa);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeletarPessoa(Pessoa pessoa)
         {
             listaPessoas.Remove(pessoa);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(Pessoa pessoa)
         {
             return View(pessoa);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPessoa(Pessoa pessoa)
+        {
+            listaPessoas.Remove(listaPessoas.Where(x => x == pessoa).First());
+            listaPessoas.Add(pessoa);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
