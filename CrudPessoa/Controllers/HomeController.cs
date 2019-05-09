@@ -70,6 +70,13 @@ namespace CrudPessoa.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult VerificaMaiorEMenor()
+        {
+            ViewBag.texto = Pessoa.VerificaMaiorEMenor(listaPessoas);
+            return View();
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
