@@ -57,11 +57,6 @@ namespace CrudPessoa.Controllers
             return View(pessoa);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
