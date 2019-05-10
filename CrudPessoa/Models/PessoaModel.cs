@@ -9,39 +9,40 @@ namespace CrudPessoa.Models
     public class Pessoa
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]        
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]        
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public int Idade { get; set; }
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public decimal Dinheiro { get; set; }
-    
+        public DateTime DataDeCadastro { get; set; }
 
-        public static string VerificaMaiorEMenor(IList<Pessoa> list)
+
+        /// <summary>
+        /// Método que verifica em uma lista de pessoas quem tem mais dinheiro.
+        /// </summary>
+        /// <param name="listaDePessoas">Lista de pessoas</param>
+        /// <returns>Retorna uma string informando a pessoa com </returns>
+        public static Pessoa CapturaPessoaComMenosDinheiro(IList<Pessoa> listaDePessoas)
         {
-            decimal menorDin = Decimal.MinValue;
-            decimal maiorDin = Decimal.MaxValue;
-            Pessoa pessoaComMenosGrana = new Pessoa();            
-            Pessoa pessoaComMaisGrana = new Pessoa();            
-            foreach (var pessoa in list)
-            {
+            Pessoa pessoaComMenosGrana = new Pessoa();
+            pessoaComMenosGrana = listaDePessoas.OrderBy(x => x.Dinheiro).First();
 
-                if (menorDin < pessoa.Dinheiro)
-                {
-                    menorDin = pessoa.Dinheiro;
-                    pessoaComMenosGrana = pessoa;
-                }
-                
-                if(maiorDin > pessoa.Dinheiro)
-                {
-                    maiorDin = pessoa.Dinheiro;
-                    pessoaComMaisGrana = pessoa;
-                }
+            return pessoaComMenosGrana;
+        }
 
-            }
+        /// <summary>
+        /// Método que verifica em uma lista de pessoas quem tem mais dinheiro.
+        /// </summary>
+        /// <param name="listaDePessoas">Lista de pessoas</param>
+        /// <returns>Retorna uma string informando a pessoa com </returns>
+        public static Pessoa CapturaPessoaComMaisDinheiro(IList<Pessoa> listaDePessoas)
+        {
+            Pessoa pessoaComMaisGrana = new Pessoa();
+            pessoaComMaisGrana = listaDePessoas.OrderByDescending(x => x.Dinheiro).First();
 
-            return $"A pessoa que tem menos dinheiro é: {pessoaComMenosGrana.Nome}, com {pessoaComMenosGrana.Dinheiro} Reais <br> A pessoa que tem mais dinheiro é: {pessoaComMaisGrana.Nome}, com {pessoaComMaisGrana.Dinheiro} Reais";
+            return pessoaComMaisGrana;
         }
     }
 }
